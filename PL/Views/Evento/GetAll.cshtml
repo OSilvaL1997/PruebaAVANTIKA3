@@ -1,0 +1,56 @@
+﻿
+
+@model ML.Evento
+
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Eventos</h2>
+
+<br />
+<div class="row">
+    <div class="col-md-12">
+        <h5>Seleccione un evento para editarlo o (+) para agregar...</h5>
+        <hr />
+    </div>
+</div>
+
+<div style="float:right;">
+    @Html.ActionLink("+", "Form", "Usuario", htmlAttributes: new { @class = "btn btn-success" })
+</div>
+
+<table class="table table-bordered table-responsive table-striped">
+    <thead>
+        <tr>
+            <td>Editar</td>
+            <td class="hidden">IdEvento</td>
+            <td>Nombre</td>
+            <td class="hidden">IdLugar</td>
+            <td>Lugar</td>
+            <td>Fecha de Evento</td>
+            <td>Precio</td>
+            <td>Eliminar</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (ML.Evento evento in Model.Eventos)
+        {
+            <tr>
+                <td><a class="btn btn-warning glyphicon glyphicon-edit" href="@Url.Action("Form", "Usuario", new { IdEvento = evento.IdEvento })"></a></td>
+                <td class="hidden">@evento.IdEvento</td>
+                <td>@evento.Nombre</td>
+                <td class="hidden">@evento.Lugar.idLugar</td>
+                <td>@evento.Lugar.Nombre</td>
+                <td>@evento.FechaHora</td>
+                <td>@evento.Precio</td>
+
+
+
+                <td><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Delete", "Usuario", new { IdEvento = evento.IdEvento})" onclick="return confirm('Estas seguro que deseas eliminar este evento?');"></a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
