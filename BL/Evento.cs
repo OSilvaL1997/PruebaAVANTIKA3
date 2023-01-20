@@ -28,6 +28,7 @@ namespace BL
 
                         collection[0] = new SqlParameter("Nombre", SqlDbType.VarChar);
                         collection[0].Value = evento.Nombre;
+                        //evento.Lugar = new ML.Lugar();
                         collection[1] = new SqlParameter("IdLugar", SqlDbType.Int);
                         collection[1].Value = evento.Lugar.idLugar;
                         collection[2] = new SqlParameter("FechaHora", SqlDbType.DateTime);
@@ -75,7 +76,7 @@ namespace BL
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Connection = context;
 
-                        SqlParameter[] collection = new SqlParameter[4];
+                        SqlParameter[] collection = new SqlParameter[5];
 
                         collection[0] = new SqlParameter("IdEvento", SqlDbType.Int);
                         collection[0].Value = evento.IdEvento;
@@ -114,7 +115,7 @@ namespace BL
             }
             return result;
         }
-        public static ML.Result GetByIdEvento(ML.Evento evento)
+        public static ML.Result GetByIdEvento(int idEvento)
         {
             ML.Result result = new ML.Result();
 
@@ -130,7 +131,7 @@ namespace BL
 
                         SqlParameter[] collection = new SqlParameter[1];
                         collection[0] = new SqlParameter("IdEvento", SqlDbType.Int);
-                        collection[0].Value = evento.IdEvento;
+                        collection[0].Value = idEvento;
 
                         cmd.Parameters.AddRange(collection);
                         using (SqlDataAdapter da = new SqlDataAdapter(cmd))
@@ -146,14 +147,15 @@ namespace BL
                                 DataRow row = tableEvento.Rows[0];
 
                                 ML.Evento eventodata = new ML.Evento();
-                                evento.IdEvento = int.Parse(row[0].ToString());
-                                evento.Nombre = row[1].ToString();
-                                evento.Lugar.idLugar = int.Parse(row[2].ToString());
-                                evento.Lugar.Nombre = row[3].ToString();
-                                evento.FechaHora = (DateTime)row[4];
-                                evento.Precio = decimal.Parse(row[5].ToString());
+                                eventodata.IdEvento = int.Parse(row[0].ToString());
+                                eventodata.Nombre = row[1].ToString();
+                                eventodata.Lugar = new ML.Lugar();
+                                eventodata.Lugar.idLugar = int.Parse(row[2].ToString());
+                                eventodata.Lugar.Nombre = row[3].ToString();
+                                eventodata.FechaHora = (DateTime)row[4];
+                                eventodata.Precio = decimal.Parse(row[5].ToString());
 
-                                result.Object = evento;
+                                result.Object = eventodata;
                                 result.Correct = true;
                             }
                             else

@@ -1,0 +1,12 @@
+C:\Users\050MAN\Documents\PruebaAVANTIKA\PruebaAVANTIKA\ML\bin\Debug\ML.dll
+C:\Users\050MAN\Documents\PruebaAVANTIKA\PruebaAVANTIKA\ML\bin\Debug\ML.pdb
+C:\Users\050MAN\Documents\PruebaAVANTIKA\PruebaAVANTIKA\ML\obj\Debug\ML.csproj.AssemblyReference.cache
+C:\Users\050MAN\Documents\PruebaAVANTIKA\PruebaAVANTIKA\ML\obj\Debug\ML.csproj.CoreCompileInputs.cache
+C:\Users\050MAN\Documents\PruebaAVANTIKA\PruebaAVANTIKA\ML\obj\Debug\ML.dll
+C:\Users\050MAN\Documents\PruebaAVANTIKA\PruebaAVANTIKA\ML\obj\Debug\ML.pdb
+C:\Users\digis\OneDrive\Documents\Aram Oziel Caleb Silva Lopez\PruebaAVANTIKA\PruebaAVANTIKA\ML\bin\Debug\ML.dll
+C:\Users\digis\OneDrive\Documents\Aram Oziel Caleb Silva Lopez\PruebaAVANTIKA\PruebaAVANTIKA\ML\bin\Debug\ML.pdb
+C:\Users\digis\OneDrive\Documents\Aram Oziel Caleb Silva Lopez\PruebaAVANTIKA\PruebaAVANTIKA\ML\obj\Debug\ML.csproj.AssemblyReference.cache
+C:\Users\digis\OneDrive\Documents\Aram Oziel Caleb Silva Lopez\PruebaAVANTIKA\PruebaAVANTIKA\ML\obj\Debug\ML.csproj.CoreCompileInputs.cache
+C:\Users\digis\OneDrive\Documents\Aram Oziel Caleb Silva Lopez\PruebaAVANTIKA\PruebaAVANTIKA\ML\obj\Debug\ML.dll
+C:\Users\digis\OneDrive\Documents\Aram Oziel Caleb Silva Lopez\PruebaAVANTIKA\PruebaAVANTIKA\ML\obj\Debug\ML.pdb

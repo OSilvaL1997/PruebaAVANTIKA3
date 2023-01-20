@@ -18,7 +18,7 @@
 </div>
 
 <div style="float:right;">
-    @Html.ActionLink("+", "Form", "Usuario", htmlAttributes: new { @class = "btn btn-success" })
+    @Html.ActionLink("+", "Form", "Evento", htmlAttributes: new { @class = "btn btn-success" })
 </div>
 
 <table class="table table-bordered table-responsive table-striped">
@@ -38,7 +38,7 @@
         @foreach (ML.Evento evento in Model.Eventos)
         {
             <tr>
-                <td><a class="btn btn-warning glyphicon glyphicon-edit" href="@Url.Action("Form", "Usuario", new { IdEvento = evento.IdEvento })"></a></td>
+                <td><a class="btn btn-warning glyphicon glyphicon-edit" href="@Url.Action("Form", "Evento", new { IdEvento = evento.IdEvento })"></a></td>
                 <td class="hidden">@evento.IdEvento</td>
                 <td>@evento.Nombre</td>
                 <td class="hidden">@evento.Lugar.idLugar</td>
@@ -48,7 +48,7 @@
 
 
 
-                <td><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Delete", "Usuario", new { IdEvento = evento.IdEvento})" onclick="return confirm('Estas seguro que deseas eliminar este evento?');"></a></td>
+                <td><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Delete", "Evento", new { IdEvento = evento.IdEvento})" onclick="return confirm('Estas seguro que deseas eliminar este evento?');"></a></td>
             </tr>
         }
     </tbody>

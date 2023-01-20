@@ -9,7 +9,7 @@ namespace PL.Controllers
     public class EventoController : Controller
     {
         // GET: Evento
-        //[HttpGet]
+        [HttpGet]
         public ActionResult GetAll()
         {
             ML.Evento evento = new ML.Evento();
@@ -22,6 +22,36 @@ namespace PL.Controllers
             return View(evento);
         }
 
+        [HttpGet]
+        public ActionResult Form(int? idEvento)
+        {
+            ML.Result resultLugares = BL.Lugar.GetAllLugar();
+            if (resultLugares.Correct)
+            {
+                ML.Evento evento = new ML.Evento();
+                evento.Lugar = new ML.Lugar();
+                evento.Lugar.Lugares = resultLugares.Objects;
+                if (idEvento == null) //Add
+                {
+                    return View(evento);
+                }
+                else //Update
+                {
+                    ML.Result resultEvento = BL.Evento.GetByIdEvento(idEvento.Value);
+                    if (resultEvento.Correct)
+                    {
+                        evento = ((ML.Evento)resultEvento.Object);
+                        evento.Lugar.Lugares = resultLugares.Objects;
+                        return View(evento);
+                    }
+                    else
+                    {
+                        //error
+                    }
+                }
+            }
+            return View();
+        }
 
         [HttpPost]
         public ActionResult Form(ML.Evento evento)

@@ -151,3 +151,20 @@ AS
 	DELETE FROM Evento
 	WHERE IdEvento = @IdEvento
 GO
+
+CREATE OR ALTER PROCEDURE GetAllLugar
+AS
+	SELECT  
+	IdLugar,
+	Nombre
+	FROM Lugar
+GO
+CREATE OR ALTER PROCEDURE GetByIdLugar 
+	@IdLugar INT
+AS
+	SELECT  
+	IdLugar,
+	Nombre
+	FROM Lugar
+	WHERE IdLugar = @IdLugar
+GO

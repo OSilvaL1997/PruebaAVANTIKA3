@@ -1,0 +1,93 @@
+﻿
+@model ML.Venta
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Evento</h2>
+            <h5>Seleccione el asiento a adquirir</h5>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="form-horizontal">
+            <div class="col-md-12">
+                @using (Html.BeginForm("Form", "Venta", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+
+                    <div class="col-md-0">
+                        @Html.LabelFor(model => model.Evento.IdEvento, new { @class = "hidden" })
+                        @Html.TextBoxFor(model => model.Evento.IdEvento, new { @class = "hidden form-control", autocomplete = "off" })
+
+                        @*hidden*@
+                    </div>
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.Evento.Nombre)
+                        <div class="input-group">
+                            @Html.TextBoxFor(model => model.Evento.Nombre, new { @class = "form-control", @id = "txtNombre", @readonly = true })
+
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.Evento.Lugar)
+                        <div class="input-group">
+                            @Html.DropDownListFor(model => model.Evento.Lugar.idLugar, new SelectList(Model.Evento.Lugar.Lugares, "IdLugar", "Nombre"), "Seleciona una opcion", new { @class = "form-control", @readonly = true, @Enabled = "false" })
+                            @Html.ValidationMessageFor(model => model.Evento.Lugar.idLugar)
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.Evento.FechaHora)
+                        <div class="input-group">
+                            @Html.TextBoxFor(model => model.Evento.FechaHora, new { @class = "form-control", @id = "txtFechaHora", @readonly = true })
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.Evento.Precio)
+                        <div class="input-group">
+                            @Html.TextBoxFor(model => model.Evento.Precio, new { @class = "form-control", @readonly = true })
+                            @Html.ValidationMessageFor(model => model.Evento.Precio)
+                        </div>
+                    </div>
+
+
+                    <table class="table table-bordered table-responsive table-striped">
+                        <thead>
+                            <tr>
+                                <td>Asiento</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (int numeroAsiento in Model.Ventas)
+                            {
+                                <tr>
+                                    <td>@numeroAsiento <a class="btn btn-success glyphicon glyphicon-ok-circle" href="@Url.Action("Compra", "Venta", new { IdEvento = Model.Evento.IdEvento, IdLugar = Model.Evento.Lugar.idLugar, NumeroAsiento = numeroAsiento})"></a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+
+
+
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                @Html.ActionLink("Regresar", "GetAll", "Venta", htmlAttributes: new { @class = "btn btn-danger" })
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

@@ -14,5 +14,6 @@ namespace ML
         public string Numero { get; set; }
         public string Localidad { get; set; }
         public int Capacidad { get; set; }
+        public List<object> Lugares { get; set; }
     }
 }
