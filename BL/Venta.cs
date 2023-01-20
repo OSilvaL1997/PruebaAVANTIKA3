@@ -162,7 +162,7 @@ namespace BL
                                     capacidadTotal = ventaGet.Lugar.Capacidad;
                                     for (int i = cuenta; cuenta < ventaGet.NumeroAsiento; i++)
                                     {
-                                        
+
                                         if (cuenta != ventaGet.NumeroAsiento)
                                         {
                                             result.Objects.Add(i);
@@ -175,6 +175,128 @@ namespace BL
                                 {
                                     result.Objects.Add(i);
                                 }
+                                result.Correct = true;
+                            }
+                            else
+                            {
+                                result.Correct = false;
+                                result.ErrorMessage = "Ocurrió un error al momento de obtener un registro";
+                            }
+                        }
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.ErrorMessage = ex.Message;
+                result.Ex = ex;
+            }
+            return result;
+        }
+        public static ML.Result GetLugarVendido(int idEvento)
+        {
+            ML.Result result = new ML.Result();
+
+            try
+            {
+                using (SqlConnection context = new SqlConnection(DL.Conexion.GetConectionString()))
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.CommandText = "GetLugarOcupado";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Connection = context;
+
+                        SqlParameter[] collection = new SqlParameter[1];
+                        collection[0] = new SqlParameter("IdEvento", SqlDbType.Int);
+                        collection[0].Value = idEvento;
+
+                        cmd.Parameters.AddRange(collection);
+
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            DataTable tablelugar = new DataTable();
+
+                            da.Fill(tablelugar);
+
+                            cmd.Connection.Open();
+
+
+                            if (tablelugar.Rows.Count > 0)
+                            {
+
+                                result.Objects = new List<object>();
+                                foreach (DataRow row in tablelugar.Rows)
+                                {
+                                    ML.Venta ventaGet = new ML.Venta();
+                                    ventaGet.NumeroAsiento = int.Parse(row[0].ToString());
+                                    ventaGet.Lugar = new ML.Lugar();
+                                    ventaGet.Lugar.Capacidad = int.Parse(row[1].ToString());
+                                    result.Objects.Add(ventaGet);
+                                }
+                                result.Correct = true;
+                            }
+                            else
+                            {
+                                result.Correct = false;
+                                result.ErrorMessage = "Ocurrió un error al momento de obtener un registro";
+                            }
+                        }
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.ErrorMessage = ex.Message;
+                result.Ex = ex;
+            }
+            return result;
+        }
+        public static ML.Result TotalVentas()
+        {
+            ML.Result result = new ML.Result();
+
+            try
+            {
+                using (SqlConnection context = new SqlConnection(DL.Conexion.GetConectionString()))
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.CommandText = "CantidadEvento";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Connection = context;
+
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            DataTable tableVentas = new DataTable();
+
+                            da.Fill(tableVentas);
+
+                            cmd.Connection.Open();
+
+
+                            if (tableVentas.Rows.Count > 0)
+                            {
+                                decimal suma = 0;
+                                result.Objects = new List<object>();
+                                foreach (DataRow row in tableVentas.Rows)
+                                {
+                                    ML.Venta ventaGet = new ML.Venta();
+                                    ventaGet.Evento = new ML.Evento();
+                                    ventaGet.Evento.IdEvento = int.Parse(row[0].ToString());
+                                    ventaGet.Evento.Nombre = row[1].ToString();
+                                    ventaGet.NumeroAsiento = int.Parse(row[2].ToString());
+                                    ventaGet.Evento.Precio = decimal.Parse(row[3].ToString());
+                                    ventaGet.Total = decimal.Parse(row[4].ToString());
+                                    suma = suma + ventaGet.Total;
+                                    ventaGet.TotalSuma = suma;
+                                    result.Objects.Add(ventaGet);
+                                }
+
                                 result.Correct = true;
                             }
                             else

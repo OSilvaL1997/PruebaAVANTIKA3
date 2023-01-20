@@ -122,6 +122,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\EventoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LugarVendidoController.cs" />
+    <Compile Include="Controllers\RecaudadoController.cs" />
     <Compile Include="Controllers\VentaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -170,6 +172,10 @@
     <Content Include="Views\Venta\GetAll.cshtml" />
     <Content Include="Views\Venta\Modal.cshtml" />
     <Content Include="Views\Venta\Form.cshtml" />
+    <Content Include="Views\LugarVendido\GetAll.cshtml" />
+    <Content Include="Views\LugarVendido\Vista.cshtml" />
+    <Content Include="Views\LugarVendido\Modal.cshtml" />
+    <Content Include="Views\Recaudado\GetAll.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

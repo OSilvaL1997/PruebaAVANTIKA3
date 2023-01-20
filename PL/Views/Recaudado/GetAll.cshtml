@@ -1,0 +1,45 @@
+﻿@model ML.Venta
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Recaudado por evento</h2>
+<br />
+<div class="row">
+    <div class="col-md-12">
+        <h5>Lista de dinero recaudado por evento</h5>
+        <hr />
+    </div>
+</div>
+
+<table class="table table-bordered table-responsive table-striped">
+    <thead>
+        <tr>
+            <td>Nombre</td>
+            <td>Asientos vendidos</td>
+            <td>Precio por asiento</td>
+            <td>Total </td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (ML.Venta venta in Model.Ventas)
+        {
+            <tr>
+                <td>@venta.Evento.Nombre</td>
+                <td>@venta.NumeroAsiento</td>
+                <td>@venta.Evento.Precio</td>
+                <td>@venta.Total</td>
+            </tr>
+
+        }
+        <tr>
+            <h3>Total de dinero recaudado = $@Model.TotalSuma </h3>
+        </tr>
+    </tbody>
+</table>
+<div class="row">
+    <div class="col-md-12">
+        
+    </div>
+</div>
+

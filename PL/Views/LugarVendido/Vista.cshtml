@@ -1,0 +1,87 @@
+﻿
+@model ML.Venta
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Lugares Vendidos</h2>
+            <h5>Lugares vendidos del evento</h5>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="form-horizontal">
+            <div class="col-md-12">
+                @using (Html.BeginForm("Vista", "LugarVendido", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+
+                    <div class="col-md-0">
+                        @Html.LabelFor(model => model.Evento.IdEvento, new { @class = "hidden" })
+                        @Html.TextBoxFor(model => model.Evento.IdEvento, new { @class = "hidden form-control", autocomplete = "off" })
+
+                        @*hidden*@
+                    </div>
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.Evento.Nombre)
+                        <div class="input-group">
+                            @Html.TextBoxFor(model => model.Evento.Nombre, new { @class = "form-control", @id = "txtNombre", @readonly = true })
+
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.Evento.Lugar)
+                        <div class="input-group">
+                            @Html.TextBoxFor(model => model.Evento.Lugar.Nombre, new { @class = "form-control", @id = "txtLugar", @readonly = true })
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.Evento.FechaHora)
+                        <div class="input-group">
+                            @Html.TextBoxFor(model => model.Evento.FechaHora, new { @class = "form-control", @id = "txtFechaHora", @readonly = true })
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.Evento.Precio)
+                        <div class="input-group">
+                            @Html.TextBoxFor(model => model.Evento.Precio, new { @class = "form-control", @readonly = true })
+                        </div>
+                    </div>
+
+
+                    <table class="table table-bordered table-responsive table-striped">
+                        <thead>
+                            <tr>
+                                <td>Asiento</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (ML.Venta venta in Model.Ventas)
+                            {
+                                <tr>
+                                    <td>@venta.NumeroAsiento <a class="btn btn-danger glyphicon glyphicon-usd" ></a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                @Html.ActionLink("Regresar", "GetAll", "LugarVendido", htmlAttributes: new { @class = "btn btn-danger" })
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
