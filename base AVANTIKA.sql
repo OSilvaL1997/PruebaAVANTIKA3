@@ -1,15 +1,6 @@
 CREATE DATABASE OSilvaAVANTIKA
 GO 
 USE OSilvaAVANTIKA
-GO 
-CREATE TABLE Cliente
-(
-	IdCliente INT NOT NULL PRIMARY KEY IDENTITY(1,1),
-	Nombre VARCHAR(20) NOT NULL,
-	ApellidoPaterno VARCHAR(20) NOT NULL,
-	ApellidoMaterno VARCHAR(20) NOT NULL,
-	RFC VARCHAR(13) NOT NULL
-)
 GO
 CREATE TABLE Lugar
 (
@@ -34,26 +25,13 @@ GO
 CREATE TABLE Venta
 (
 	IdVenta INT NOT NULL PRIMARY KEY IDENTITY(1,1),
-	--IdCliente INT NOT NULL,
 	IdEvento INT NOT NULL,
 	IdLugar INT NOT NULL,
 	NumeroAsiento INT NOT NULL,
 	FechaOperacion DATETIME NOT NULL,
-	--BoletosAdq INT NOT NULL
-	--FOREIGN KEY (IdCliente) REFERENCES Cliente(IdCliente),
 	FOREIGN KEY (IdEvento) REFERENCES Evento(IdEvento),
 	FOREIGN KEY (IdLugar) REFERENCES Lugar(IdLugar)
 )
-GO
-INSERT INTO Cliente VALUES('Miguel','Juarez','Aguilar','LLLLDDDDDDXXX')
-GO
-INSERT INTO Cliente VALUES('Hidalgo','Pichardo','Romero','LLLLDDDDDDXXX')
-GO
-INSERT INTO Cliente VALUES('Jose','Luna','Buendia','LLLLDDDDDDXXX')
-GO
-INSERT INTO Cliente VALUES('Angel','De la Rosa','Aviles','LLLLDDDDDDXXX')
-GO
-INSERT INTO Cliente VALUES('Kevin','Sanchez','Urtado','LLLLDDDDDDXXX')
 GO
 INSERT INTO Lugar VALUES('Palacio de los deportes','Insurgentes','123','Iztapalapa',100)
 GO
@@ -78,6 +56,8 @@ GO
 INSERT INTO Venta VALUES(1,1,4,SYSDATETIME())
 GO
 INSERT INTO Venta VALUES(2,2,18,SYSDATETIME())
+GO
+INSERT INTO Venta VALUES(2,2,19,SYSDATETIME())
 GO
 INSERT INTO Venta VALUES(3,3,11,SYSDATETIME())
 GO
@@ -152,7 +132,7 @@ AS
 	WHERE IdEvento = @IdEvento
 GO
 
-ALTER PROCEDURE GetAllLugar
+CREATE PROCEDURE GetAllLugar
 AS
 	SELECT  
 	IdLugar,
@@ -163,7 +143,7 @@ AS
 	Capacidad
 	FROM Lugar
 GO
-ALTER PROCEDURE GetByIdLugar 
+CREATE PROCEDURE GetByIdLugar 
 	@IdLugar INT
 AS
 	SELECT  
@@ -193,4 +173,17 @@ AS
 	ON Venta.IdLugar = Lugar.IdLugar 
 	WHERE IdEvento = @IdEvento
 	ORDER BY NumeroAsiento
+GO
+CREATE PROCEDURE CantidadEvento
+AS
+	SELECT 
+	Evento.IdEvento,
+	Evento.Nombre,
+	COUNT(Venta.NumeroAsiento) AS AsientosVendidos,
+	Evento.Precio,
+	SUM(Evento.Precio) AS TotalVentas
+	FROM Evento 
+	INNER JOIN Venta
+	ON Evento.IdEvento = Venta.IdEvento 
+	GROUP BY Evento.IdEvento, Evento.Nombre, Evento.Precio
 GO
