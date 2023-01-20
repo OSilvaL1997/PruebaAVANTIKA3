@@ -90,7 +90,7 @@ namespace PL.Controllers
             ML.Result result = BL.Evento.DeleteEvento(evento);
             if (result.Correct)
             {
-                ViewBag.Mensaje = "lugar Eliminada Exitosamente";
+                ViewBag.Mensaje = "Lugar eliminado";
             }
             else
             {

@@ -164,15 +164,28 @@ AS
 	INSERT INTO Venta 
 	VALUES(@IdEvento,@IdLugar,@NumeroAsiento,SYSDATETIME())
 GO
-CREATE PROCEDURE GetLugarOcupado 
+CREATE ALTER PROCEDURE GetLugarOcupado 
 	@IdEvento INT
 AS
-	SELECT NumeroAsiento, Lugar.Capacidad 
-	FROM Venta 
-	INNER JOIN Lugar
-	ON Venta.IdLugar = Lugar.IdLugar 
-	WHERE IdEvento = @IdEvento
-	ORDER BY NumeroAsiento
+
+	IF EXISTS(SELECT NumeroAsiento FROM Venta 
+			  WHERE IdEvento = @IdEvento )
+	BEGIN
+		SELECT NumeroAsiento, Lugar.Capacidad 
+		FROM Venta 
+		INNER JOIN Lugar
+		ON Venta.IdLugar = Lugar.IdLugar 
+		WHERE IdEvento = @IdEvento
+		ORDER BY NumeroAsiento
+	END
+	ELSE
+	BEGIN
+		SELECT Lugar.Capacidad +1, Lugar.Capacidad 
+		FROM Lugar 
+		INNER JOIN Evento
+		ON Lugar.IdLugar = Evento.IdLugar 
+		WHERE IdEvento = @IdEvento
+	END
 GO
 CREATE PROCEDURE CantidadEvento
 AS

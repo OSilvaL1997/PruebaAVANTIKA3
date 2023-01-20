@@ -63,11 +63,11 @@ namespace PL.Controllers
                 result = BL.Venta.AddVenta(venta);
                 if (result.Correct)
                 {
-                    ViewBag.Mensaje = "Agregado exitosamente";
+                    ViewBag.Mensaje = "COMPRA EXITOSA!";
                 }
                 else
                 {
-                    ViewBag.Mensaje = "No se Agrego" + result.ErrorMessage;
+                    ViewBag.Mensaje = "No se logro la compra" + result.ErrorMessage;
                 }
             return PartialView("Modal");
         }

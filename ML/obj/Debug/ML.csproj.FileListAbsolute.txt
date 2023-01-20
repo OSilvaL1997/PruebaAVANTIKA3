@@ -16,3 +16,9 @@ C:\Users\050MAN\Source\Repos\PruebaAVANTIKA3\ML\obj\Debug\ML.csproj.AssemblyRefe
 C:\Users\050MAN\Source\Repos\PruebaAVANTIKA3\ML\obj\Debug\ML.csproj.CoreCompileInputs.cache
 C:\Users\050MAN\Source\Repos\PruebaAVANTIKA3\ML\obj\Debug\ML.dll
 C:\Users\050MAN\Source\Repos\PruebaAVANTIKA3\ML\obj\Debug\ML.pdb
+C:\Users\digis\Source\Repos\PruebaAVANTIKA3\ML\bin\Debug\ML.dll
+C:\Users\digis\Source\Repos\PruebaAVANTIKA3\ML\bin\Debug\ML.pdb
+C:\Users\digis\Source\Repos\PruebaAVANTIKA3\ML\obj\Debug\ML.csproj.AssemblyReference.cache
+C:\Users\digis\Source\Repos\PruebaAVANTIKA3\ML\obj\Debug\ML.csproj.CoreCompileInputs.cache
+C:\Users\digis\Source\Repos\PruebaAVANTIKA3\ML\obj\Debug\ML.dll
+C:\Users\digis\Source\Repos\PruebaAVANTIKA3\ML\obj\Debug\ML.pdb
