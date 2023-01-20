@@ -34,13 +34,13 @@ GO
 CREATE TABLE Venta
 (
 	IdVenta INT NOT NULL PRIMARY KEY IDENTITY(1,1),
-	IdCliente INT NOT NULL,
+	--IdCliente INT NOT NULL,
 	IdEvento INT NOT NULL,
 	IdLugar INT NOT NULL,
 	NumeroAsiento INT NOT NULL,
 	FechaOperacion DATETIME NOT NULL,
 	--BoletosAdq INT NOT NULL
-	FOREIGN KEY (IdCliente) REFERENCES Cliente(IdCliente),
+	--FOREIGN KEY (IdCliente) REFERENCES Cliente(IdCliente),
 	FOREIGN KEY (IdEvento) REFERENCES Evento(IdEvento),
 	FOREIGN KEY (IdLugar) REFERENCES Lugar(IdLugar)
 )
@@ -75,15 +75,15 @@ INSERT INTO Evento VALUES('Los Vitles',4,GETDATE(),8500)
 GO
 INSERT INTO Evento VALUES('El Ranstein',5,GETDATE(),7896)
 GO
-INSERT INTO Venta VALUES(1,1,1,4,SYSDATETIME())
+INSERT INTO Venta VALUES(1,1,4,SYSDATETIME())
 GO
-INSERT INTO Venta VALUES(2,2,2,18,SYSDATETIME())
+INSERT INTO Venta VALUES(2,2,18,SYSDATETIME())
 GO
-INSERT INTO Venta VALUES(3,3,3,11,SYSDATETIME())
+INSERT INTO Venta VALUES(3,3,11,SYSDATETIME())
 GO
-INSERT INTO Venta VALUES(4,4,4,1,SYSDATETIME())
+INSERT INTO Venta VALUES(4,4,1,SYSDATETIME())
 GO
-INSERT INTO Venta VALUES(5,5,5,6,SYSDATETIME())
+INSERT INTO Venta VALUES(5,5,6,SYSDATETIME())
 GO
 
 CREATE PROCEDURE addEvento
@@ -152,19 +152,45 @@ AS
 	WHERE IdEvento = @IdEvento
 GO
 
-CREATE OR ALTER PROCEDURE GetAllLugar
+ALTER PROCEDURE GetAllLugar
 AS
 	SELECT  
 	IdLugar,
-	Nombre
+	Nombre,
+	Calle,
+	Numero,
+	Localidad,
+	Capacidad
 	FROM Lugar
 GO
-CREATE OR ALTER PROCEDURE GetByIdLugar 
+ALTER PROCEDURE GetByIdLugar 
 	@IdLugar INT
 AS
 	SELECT  
 	IdLugar,
-	Nombre
+	Nombre,
+	Calle,
+	Numero,
+	Localidad,
+	Capacidad
 	FROM Lugar
 	WHERE IdLugar = @IdLugar
+GO
+CREATE PROCEDURE AddVenta
+	@IdEvento INT,
+	@IdLugar INT,
+	@NumeroAsiento INT
+AS
+	INSERT INTO Venta 
+	VALUES(@IdEvento,@IdLugar,@NumeroAsiento,SYSDATETIME())
+GO
+CREATE PROCEDURE GetLugarOcupado 
+	@IdEvento INT
+AS
+	SELECT NumeroAsiento, Lugar.Capacidad 
+	FROM Venta 
+	INNER JOIN Lugar
+	ON Venta.IdLugar = Lugar.IdLugar 
+	WHERE IdEvento = @IdEvento
+	ORDER BY NumeroAsiento
 GO
